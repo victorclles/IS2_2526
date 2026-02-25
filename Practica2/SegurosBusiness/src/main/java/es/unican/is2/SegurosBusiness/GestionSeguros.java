@@ -1,14 +1,6 @@
 package es.unican.is2.SegurosBusiness;
 
-import java.util.zip.DataFormatException;
-
-
-
-/**
- * Interfaz de negocio para gestionar los
- * seguros de la empresa de seguros
- */
-public interface IGestionSeguros {
+public class GestionSeguros {
 	
 	/**
 	 * Agrega un nuevo seguro al cliente cuyo dni se indica.
@@ -20,7 +12,9 @@ public interface IGestionSeguros {
 	 * @throws DataAccessException si se produce un error 
 	 * en el acceso a la base de datos
 	 */
-	public Seguro nuevoSeguro(Seguro s, String dni) throws OperacionNoValida, DataAccessException;
+	public Seguro nuevoSeguro(Seguro s, String dni) throws OperacionNoValida, DataAccessException {
+		
+	}
 	
 	/**
 	 * Elimina el seguro cuya matricula se indica y 
@@ -33,7 +27,9 @@ public interface IGestionSeguros {
 	 * @throws DataAccessException si se produce un error 
 	 * en el acceso a la base de datos
 	 */
-	public Seguro bajaSeguro(String matricula, String dni) throws OperacionNoValida, DataAccessException;
+	public Seguro bajaSeguro(String matricula, String dni) throws OperacionNoValida, DataAccessException {
+		
+	}
 
 	/**
 	 * Agrega o modifica el conductor adicional al seguro cuya matricula se indica
@@ -44,6 +40,8 @@ public interface IGestionSeguros {
 	 * @throws DataAccessException si se produce un error 
 	 * en el acceso a la base de datos
 	 */
-	public Seguro anhadeConductorAdicional(String matricula, String conductor) throws DataAccessException;
+	public Seguro anhadeConductorAdicional(String matricula, String conductor) throws DataAccessException {
+		
+	}
 
 }
