@@ -1,2 +1,1 @@
-# IS2_2526
-IS2
+Victor Calles Alonso, Jorge Alegría Ocampo
