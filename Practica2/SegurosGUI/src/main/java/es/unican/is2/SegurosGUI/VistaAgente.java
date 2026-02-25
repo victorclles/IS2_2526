@@ -1,3 +1,5 @@
+package es.unican.is2.SegurosGUI;
+
 
 
 import javax.swing.JFrame;
