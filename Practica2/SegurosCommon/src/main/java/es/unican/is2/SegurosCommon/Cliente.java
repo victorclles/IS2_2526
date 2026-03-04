@@ -79,7 +79,9 @@ public class Cliente {
      * todos los seguros a su nombre
      */
     public double totalSeguros() {
-        return 0;
+        return seguros
+        		.stream()
+        		.map((s) -> !getMinusvalia() ? s.precio() : s.precio() * (1 - Seguro.DESCUENTO_MINUSVALIA))
+        		.reduce(0.0, Double::sum);
     }
-
 }

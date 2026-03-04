@@ -20,42 +20,22 @@ public class GestionSeguros implements IGestionClientes, IGestionSeguros, IInfoS
 	}
 	
 	
-	/**
-	 * Persiste un nuevo cliente
-	 * @param c Cliente que desea persistir
-	 * @return El cliente persitido
-	 * 		   null si no se persiste porque ya existe
-	  * @throws DataAccessException si se produce un error 
-	 * en el acceso a la base de datos
-	 */
+	/// IGestionClientes
+	
+	@Override
 	public Cliente nuevoCliente(Cliente c) throws DataAccessException {
 		return clientesDao.creaCliente(c);
 	}
 	
-	/**
-	 * Elimina el cliente cuyo dni se indica
-	 * @param dni DNI del cliente que se quiere eliminar
-	 * @return El cliente eliminado
-	 * 		   null si no se elimina porque no se encuentra 
-	 * @throws OperacionNoValida si el cliente existe 
-	 *         pero tiene seguros a su nombre
-	 * @throws DataAccessException si se produce un error 
-	 * en el acceso a la base de datos
-	 */
+	@Override
 	public Cliente bajaCliente(String dni) throws OperacionNoValida,DataAccessException {
 		return clientesDao.eliminaCliente(dni);
 	}
 	
-	/**
-	 * Agrega un nuevo seguro al cliente cuyo dni se indica.
-	 * @param s Seguro que desea agregar
-	 * @param dni DNI del cliente
-	 * @return El seguro agregado
-	 * 		   null si no se agrega porque no se encuentra el cliente
-	 * @throws OperacionNoValida si el seguro ya existe
-	 * @throws DataAccessException si se produce un error 
-	 * en el acceso a la base de datos
-	 */
+	
+	/// IGestionSeguros
+	
+	@Override
 	public Seguro nuevoSeguro(Seguro s, String dni) throws OperacionNoValida, DataAccessException {
 		Cliente cliente = clientesDao.cliente(dni);
 		if (cliente == null) {
@@ -72,17 +52,7 @@ public class GestionSeguros implements IGestionClientes, IGestionSeguros, IInfoS
 		return seguro;
 	}
 	
-	/**
-	 * Elimina el seguro cuya matricula se indica y 
-	 * que pertenece al cliente cuyo dni se indica
-	 * @param matricula Identificador del seguro a eliminar
-	 * @param dni DNI del propietario del seguro
- 	 * @return El seguro eliminado
- 	 *         null si el seguro o el cliente no existen
- 	 * @throws OperacionNoValida si el seguro no pertenece al dni indicado
-	 * @throws DataAccessException si se produce un error 
-	 * en el acceso a la base de datos
-	 */
+	@Override
 	public Seguro bajaSeguro(String matricula, String dni) throws OperacionNoValida, DataAccessException {
 		Cliente cliente = clientesDao.cliente(dni);
 		if (cliente == null) {
@@ -99,15 +69,7 @@ public class GestionSeguros implements IGestionClientes, IGestionSeguros, IInfoS
 		return seguro;
 	}
 
-	/**
-	 * Agrega o modifica el conductor adicional al seguro cuya matricula se indica
-	 * @param matricula Identificador del seguro
-	 * @param conductor Nombre del conductor adicional a agregar
- 	 * @return El seguro modificado
- 	 *         null si el seguro no existe
-	 * @throws DataAccessException si se produce un error 
-	 * en el acceso a la base de datos
-	 */
+	@Override
 	public Seguro anhadeConductorAdicional(String matricula, String conductor) throws DataAccessException {
 		Seguro seguro = segurosDao.seguroPorMatricula(matricula);
 		if (seguro == null) {
@@ -118,12 +80,13 @@ public class GestionSeguros implements IGestionClientes, IGestionSeguros, IInfoS
 		return seguro;
 	}
 
-
+	
+	/// IInfoSeguros
+	
 	@Override
 	public Cliente cliente(String dni) throws DataAccessException {
 		return clientesDao.cliente(dni);
 	}
-
 
 	@Override
 	public Seguro seguro(String matricula) throws DataAccessException {
