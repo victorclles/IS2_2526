@@ -3,6 +3,9 @@ package es.unican.is2.SegurosDAOH2;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import es.unican.is2.SegurosCommon.Cliente;
+import es.unican.is2.SegurosCommon.DataAccessException;
+
 
 
 /**
