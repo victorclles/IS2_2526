@@ -20,8 +20,14 @@ public class Seguro {
 
 	private String conductorAdicional;
 
+	private final static Double PRECIO_TODO_RIESGO = 1000.0;
+	private final static Double PRECIO_TERCERO_LUNAS = 600.0;
+	private final static Double PRECIO_TERCEROS = 400.0;
+	private final static int LIMITE_POTENCIA_110 = 110;
+	private final static int LIMITE_POTENCIA_90 = 90;
 	private final static Double AUMENTO_POTENCIA_MAYOR_110 = 0.2;
 	private final static Double AUMENTO_POTENCIA_MAYOR_IGUAL_90 = 0.05;
+	private final static int NUM_PRIMER_ANHOS_PARA_DESCUENTO = 1;
 	private final static Double DESCUENTO_PRIMER_ANHO = 0.2;
 	public final static Double DESCUENTO_MINUSVALIA = 0.25;
 	
@@ -122,32 +128,39 @@ public class Seguro {
 	 *         0 si el seguro todavía no está en vigor (no se ha alcanzado su fecha de inicio)
      */
 	public double precio() {
+		if (getFechaInicio().isAfter(LocalDate.now())) {
+			return 0;
+		}
+		
 		double precio;
 		
 		switch (getCobertura()) {
 		case TODO_RIESGO:
-			precio = 1000;
+			precio = PRECIO_TODO_RIESGO;
 			break;
 		case TERCEROS_LUNAS:
-			precio = 600;
+			precio = PRECIO_TERCERO_LUNAS;
 			break;
 		case TERCEROS:
-			precio = 400;
+			precio = PRECIO_TERCEROS;
 			break;
 		default:
 			throw new IllegalStateException("Cobertura case not covered: " + getCobertura().toString());
 		}
 		
 		double aumentoPotencia = 0.0;
-		if (getPotencia() > 110) {
+		if (getPotencia() > LIMITE_POTENCIA_110) {
 			aumentoPotencia = precio * AUMENTO_POTENCIA_MAYOR_110;
-		} else if (getPotencia() > 90) {
+		} else if (getPotencia() >= LIMITE_POTENCIA_90) {
 			aumentoPotencia = precio * AUMENTO_POTENCIA_MAYOR_IGUAL_90;
 		}
 		precio += aumentoPotencia;
 	
 		double ofertaPrimerAnho = 0.0;
-		if (getFechaInicio().compareTo(LocalDate.now().plus(Period.ofYears(1))) < 0) {
+		if (getFechaInicio()
+				.plus(Period.ofYears(NUM_PRIMER_ANHOS_PARA_DESCUENTO))
+				.compareTo(LocalDate.now()) > 0
+			) {
 			ofertaPrimerAnho = precio * DESCUENTO_PRIMER_ANHO;
 		}
 		precio -= ofertaPrimerAnho;

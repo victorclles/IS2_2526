@@ -28,7 +28,12 @@ public class GestionSeguros implements IGestionClientes, IGestionSeguros, IInfoS
 	}
 	
 	@Override
-	public Cliente bajaCliente(String dni) throws OperacionNoValida,DataAccessException {
+	public Cliente bajaCliente(String dni) throws OperacionNoValida, DataAccessException {
+		Cliente cliente = clientesDao.cliente(dni);
+		if (!cliente.getSeguros().isEmpty()) {
+			throw new OperacionNoValida("Cliente has seguros.");
+		}
+		
 		return clientesDao.eliminaCliente(dni);
 	}
 	
@@ -65,8 +70,10 @@ public class GestionSeguros implements IGestionClientes, IGestionSeguros, IInfoS
 		if (!cliente.getSeguros().contains(seguro)) {
 			throw new OperacionNoValida("Client does not contain that");
 		}
+		cliente.getSeguros().remove(seguro);
+		clientesDao.actualizaCliente(cliente);
 		
-		return seguro;
+		return segurosDao.eliminaSeguro(seguro.getId());
 	}
 
 	@Override
@@ -77,7 +84,7 @@ public class GestionSeguros implements IGestionClientes, IGestionSeguros, IInfoS
 		}
 		
 		seguro.setConductorAdicional(conductor);
-		return seguro;
+		return segurosDao.actualizaSeguro(seguro);
 	}
 
 	
@@ -90,8 +97,6 @@ public class GestionSeguros implements IGestionClientes, IGestionSeguros, IInfoS
 
 	@Override
 	public Seguro seguro(String matricula) throws DataAccessException {
-		Seguro seguro = new Seguro();
-		seguro.setMatricula(matricula);
-		return segurosDao.creaSeguro(seguro);
+		return segurosDao.seguroPorMatricula(matricula);
 	}
 }
