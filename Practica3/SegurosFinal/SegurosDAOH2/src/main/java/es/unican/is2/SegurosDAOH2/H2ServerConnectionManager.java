@@ -51,9 +51,9 @@ public class H2ServerConnectionManager {
 	 */
 	public static void cargaDatos() throws DataAccessException {
         // Creacion programatica de la BBDD
-		try (Statement stm = con.createStatement()) {
-			Connection con = getConnection();
+        Connection con = getConnection();
 
+		try (Statement stm = con.createStatement()) {
 			// Creacion de la tabla Clientes
 			String sql= "CREATE TABLE Clientes (dni CHAR(9) NOT NULL, nombre VARCHAR(100) NOT NULL, "
 					+ "minusvalia BOOLEAN NOT NULL, PRIMARY KEY(dni))";
@@ -98,7 +98,7 @@ public class H2ServerConnectionManager {
 					+ "VALUES ('4444BBB', '2024-01-02', 'TERCEROS_LUNAS', 300, '44444444A')";
 			stm.executeUpdate(sql);
 		} catch (SQLException e) {
-			logger.warn(e);
+			logger.warning(e.getMessage());
 			throw new DataAccessException();
 		} 		
 	}
