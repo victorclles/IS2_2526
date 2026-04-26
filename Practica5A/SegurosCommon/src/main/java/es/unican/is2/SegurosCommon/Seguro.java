@@ -30,6 +30,24 @@ public class Seguro {
 	private static final int NUM_PRIMER_ANHOS_PARA_DESCUENTO = 1;
 	private static final Double DESCUENTO_PRIMER_ANHO = 0.2;
 	public static final Double DESCUENTO_MINUSVALIA = 0.25;
+
+    public Seguro() {}
+    
+    public Seguro(long id, String matricula, int potencia, Cobertura cobertura, LocalDate fechaInicio, String conductorAdicional) {
+        if (matricula == null) throw new NullPointerException("matricula cannot be null");
+        if (cobertura == null) throw new NullPointerException("cobertura cannot be null");
+        if (fechaInicio == null) throw new NullPointerException("fechaInicio cannot be null");
+        if (potencia < 0) throw new IllegalArgumentException("potencia must be non negative");
+        if (!matricula.matches("^\\d{4}[A-Z]{3}$")) 
+            throw new IllegalArgumentException("Matricula must be 4 digits followed by 3 characters");
+
+        this.id = id;
+        this.matricula = matricula;
+        this.potencia = potencia;
+        this.cobertura = cobertura;
+        this.fechaInicio = fechaInicio;
+        this.conductorAdicional = conductorAdicional;
+    }
 	
 	/**
 	 * Retorna el identificador del seguro
@@ -57,6 +75,9 @@ public class Seguro {
 	 *  Asigna el valor de la matrícula del seguro
 	 */
 	public void setMatricula(String matricula) {
+        if (matricula == null) throw new NullPointerException("matricula cannot be null");
+        if (!matricula.matches("^\\d{4}[A-Z]{3}$")) 
+            throw new IllegalArgumentException("Matricula must be 4 digits followed by 3 characters");
 		this.matricula = matricula;
 	}
 	/**
@@ -71,6 +92,7 @@ public class Seguro {
 	 * @param fechaInicio La fecha de inicio del seguro
 	 */
 	public void setFechaInicio(LocalDate fechaInicio) {
+        if (fechaInicio == null) throw new NullPointerException("fechaInicio cannot be null");
 		this.fechaInicio = fechaInicio;
 	}
 
@@ -86,8 +108,9 @@ public class Seguro {
 	 * @param cobertura El tipo de cobertura del seguro
 	 */	
 	public void setCobertura(Cobertura cobertura) {
+        if (cobertura == null) throw new NullPointerException("cobertura cannot be null");
 		this.cobertura = cobertura;		
-}
+    }
 
 	/**
      * Retorna la potencia del coche asociado 
@@ -101,6 +124,7 @@ public class Seguro {
 	 *  Asigna el valor del identificador del seguro
 	 */
 	public void setPotencia(int potencia) {
+        if (potencia < 0) throw new IllegalArgumentException("potencia must be non negative");
 		this.potencia = potencia;
 	}
 

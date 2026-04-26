@@ -17,10 +17,17 @@ public class Cliente {
 
     private List<Seguro> seguros = new LinkedList<Seguro>();
 
+    public Cliente() {};
+
     /**
      * Constructor de la clase Cliente.
      */
     public Cliente(String dni, String nombre, boolean minusvalia) {
+        if (dni == null) throw new NullPointerException("dni cannot be null");
+        if (nombre == null) throw new NullPointerException("nombre cannot be null");
+        if (!dni.matches("\\d{8}[A-Z]"))
+            throw new IllegalArgumentException("`dni` must follow this format 8 numbers + 1 uppercase char");
+        
         this.dni = dni;
         this.nombre = nombre;
         this.minusvalia = minusvalia;
@@ -51,6 +58,9 @@ public class Cliente {
      * Asigna el nombre del cliente
      */
     public void setNombre(String nombre) {
+        if (nombre == null) 
+            throw new IllegalArgumentException("`nombre` cannot be null");
+
         this.nombre = nombre;
     }
     /**
@@ -65,6 +75,9 @@ public class Cliente {
      * @param dni
      */
     public void setDni(String dni) {
+        if (dni == null) throw new NullPointerException("dni cannot be null");
+        if (!dni.matches("\\d{8}[A-Z]"))
+            throw new IllegalArgumentException("`dni` must follow this format 8 numbers + 1 uppercase char");
         this.dni = dni;
     }
     
