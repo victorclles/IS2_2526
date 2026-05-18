@@ -2,7 +2,7 @@
 package es.unican.is2.Transportes;
 
 /* Clase que representa un transporte realizado por un conductor */
-public class Transporte { // Wmc = 9, CCog = 3
+public class Transporte { // Wmc = 9, CCog = 4
 	
 	private double horas;
 	private int ton;
@@ -26,7 +26,7 @@ public class Transporte { // Wmc = 9, CCog = 3
 		this.cat = cat;
 		if (cat.equals(CategoriaTransporte.Personas)) { // Wmc +1, Ccog + 1
 			this.personas = valor;
-		} else  {
+		} else  { // Ccog + 1
 			this.ton = valor;
 		}
 	}

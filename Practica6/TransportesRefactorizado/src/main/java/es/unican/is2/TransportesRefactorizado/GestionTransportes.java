@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class GestionTransportes { // Wmc = 14, CCog = 10
+public class GestionTransportes { // Wmc = 14, CCog = 9
 
-	private List<Conductor> conductores = new ArrayList<Conductor>();
+	private static List<Conductor> conductores = new ArrayList<Conductor>();
 
 	public Conductor buscaConductor(String DNI) { // Wmc + 1		
 		for(Conductor c: conductores) // Wmc + 1, CCog +1
@@ -35,7 +35,7 @@ public class GestionTransportes { // Wmc = 14, CCog = 10
 				maxSueldo = conductor.sueldo();
 				resultado.clear();
 				resultado.add(conductor);
-			} else if (conductor.sueldo() == maxSueldo) { // Wmc + 1, CCog +2
+			} else if (conductor.sueldo() == maxSueldo) { // Wmc + 1, CCog +1
 				resultado.add(conductor);
 			}
 		}
@@ -58,4 +58,5 @@ public class GestionTransportes { // Wmc = 14, CCog = 10
 		}
 		c.anhadeTransporte(t);
 	}
+
 }

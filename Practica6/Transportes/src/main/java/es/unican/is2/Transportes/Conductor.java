@@ -5,7 +5,7 @@ import java.util.ArrayList;
  * Clase que representa a un conductor, con sus datos personales
  * y los transportes que ha realizado. 
  */
-public class Conductor { // Wmc = 18, CCog = 8
+public class Conductor { // Wmc = 18, CCog = 9
 
 	private ArrayList<Transporte> transportes = new ArrayList<Transporte>();
 	private String dni;
@@ -65,7 +65,7 @@ public class Conductor { // Wmc = 18, CCog = 8
 				case Personas: // Wmc +1
 					if (t.getPersonas() < 10) // Wmc +1, Ccog + 3
 						sueldoExtraTransporte = t.horas() * 0.5;
-					else
+					else // Ccog + 1
 						sueldoExtraTransporte = t.horas();
 					break;
 			}

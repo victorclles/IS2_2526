@@ -1,6 +1,6 @@
 package es.unican.is2.TransportesRefactorizado;
 
-public class TransportePersonas extends Transporte { // Wmc = 7, Ccog = 3
+public class TransportePersonas extends Transporte { // Wmc = 7, Ccog = 4
     private int personas;
     
 	private final static int MAX_PERSONAS_TRANSPORTE_COLECTIVO = 9;
@@ -11,7 +11,6 @@ public class TransportePersonas extends Transporte { // Wmc = 7, Ccog = 3
     /**
 	 * Constructor de la clase TransportePersonas
 	 * @param horas Horas que ha durado el transporte
-	 * @param cat Categoria del transporte
 	 * @param personas Personas en el transporte
 	 */ 
 	public TransportePersonas(double horas, int personas) throws IllegalArgumentException { // Wmc + 1
@@ -44,7 +43,7 @@ public class TransportePersonas extends Transporte { // Wmc = 7, Ccog = 3
 
 		if (esColectivo())  // Wmc + 1, Ccog + 1
 			out *= EXTRA_EUROS_POR_HORA_TRANSPORTE_COLECTIVO;
-		else 
+		else // Ccog + 1
 			out *= EXTRA_EUROS_POR_HORA_TRANSPORTE_NO_COLECTIVO;
 
 		return out;

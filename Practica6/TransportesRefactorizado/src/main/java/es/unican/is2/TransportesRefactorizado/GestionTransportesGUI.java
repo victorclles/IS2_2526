@@ -6,7 +6,7 @@ import fundamentos.*;
 /**
  * Gestion de una empresa de transportes
  */
-public class GestionTransportesGUI { // Wmc = 16, Ccog = 8
+public class GestionTransportesGUI { // Wmc = 16, Ccog = 10
 	private static final int ANHADE_CONDUCT = 0;
 	private static final int ANHADE_TRANSP = 1;
 	private static final int SUELDO_CONDUCT = 2;
@@ -82,7 +82,7 @@ public class GestionTransportesGUI { // Wmc = 16, Ccog = 8
 		c = gt.buscaConductor(dni);
 		if (c!=null){ // Wmc + 1, Ccog +1
 			mensaje("Sueldo", "El sueldo del conductor es: "+c.sueldo());
-		} else {
+		} else { // Ccog + 1
 			mensaje("ERROR", "No existe un conductor con DNI "+dni);
 		}
 	}
@@ -108,7 +108,7 @@ public class GestionTransportesGUI { // Wmc = 16, Ccog = 8
 		c = gt.buscaConductor(dni);
 		if (c!=null) { // Wmc + 1, Ccog +1
 			gt.anhadirTransporteRefactor(c, tipo, horas, personas, toneladas);
-		} else {
+		} else { // Ccog + 1
 			mensaje("ERROR", "No existe un conductor con DNI "+dni);
 		}
 	}

@@ -87,7 +87,7 @@ public class GestionTransportesGUI { // Wmc = 18, CCog = 34
 							c.anhadeTransporte(t);
 							break;		
 					}
-				} else {
+				} else { // Ccog + 1
 					mensaje("ERROR", "No existe un conductor con DNI "+dni);
 				}
 				break;
@@ -100,7 +100,7 @@ public class GestionTransportesGUI { // Wmc = 18, CCog = 34
 				c = gt.buscaConductor(dni);
 				if (c!=null){ // Wmc +1, Ccog + 3
 					mensaje("Sueldo", "El sueldo del conductor es: "+c.sueldo());
-				} else {
+				} else { // Ccog + 1
 					mensaje("ERROR", "No existe un conductor con DNI "+dni);
 				}
  				break;
@@ -113,14 +113,14 @@ public class GestionTransportesGUI { // Wmc = 18, CCog = 34
 						maxSueldo = conductor.sueldo();
 						resultado.clear();
 						resultado.add(conductor);
-					} else if (conductor.sueldo() == maxSueldo) { // Wmc +1, Ccog + 4
+					} else if (conductor.sueldo() == maxSueldo) { // Wmc +1, Ccog + 1
 						resultado.add(conductor);
 					}
 				}		
 				String msj = "";
 				if (resultado.size() == 0) { // Wmc +1, Ccog + 3
 					msj = "No hay conductores";
-				} else {
+				} else { // Ccog + 1
 					for (Conductor conductor : resultado) { // Wmc +1, Ccog + 4
 						msj += conductor.getNombre() + " "+conductor.getNombre()+"\n";
 					}
